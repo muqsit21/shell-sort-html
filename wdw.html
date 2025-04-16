@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shell Sort Visualization</title>
+    <title>Shell Sort Visualization stuffs</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,7 +29,7 @@
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        const numBars = 150;  // Increased number of bars to 150
+        const numBars = 200;  // Increased number of bars to 150
         const barWidth = canvas.width / numBars;
         let array = [];
 
@@ -62,11 +62,11 @@
                         array[j] = array[j - gap];
                         j -= gap;
                         drawArray(j); // Visualize the change
-                        await new Promise(resolve => setTimeout(resolve, 5)); // Slower animation to show progress
+                        await new Promise(resolve => setTimeout(resolve, 10)); // Slower animation to show progress
                     }
                     array[j] = temp;
                 }
-                gap = Math.floor(gap / 2);
+                gap = Math.floor(gap / 2.2);
             }
             drawArray(); // Final state of the array
         }
