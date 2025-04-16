@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shell Sort Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        canvas {
+            margin-top: 20px;
+        }
+        #reset {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Shell Sort Visualization</h1>
+    <canvas id="canvas" width="1200" height="400"></canvas> <!-- Increased canvas width -->
+    <button id="reset">Reset Array</button>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const numBars = 150;  // Increased number of bars to 150
+        const barWidth = canvas.width / numBars;
+        let array = [];
+
+        // Initialize random array
+        function initializeArray() {
+            array = [];
+            for (let i = 0; i < numBars; i++) {
+                array.push(Math.floor(Math.random() * canvas.height));
+            }
+            drawArray();
+        }
+
+        // Draw the array bars on the canvas
+        function drawArray(highlightIndex = null) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < array.length; i++) {
+                ctx.fillStyle = highlightIndex === i ? 'red' : 'blue';
+                ctx.fillRect(i * barWidth, canvas.height - array[i], barWidth - 1, array[i]);
+            }
+        }
+
+        // Shell Sort algorithm
+        async function shellSort() {
+            let gap = Math.floor(array.length / 2);
+            while (gap > 0) {
+                for (let i = gap; i < array.length; i++) {
+                    let temp = array[i];
+                    let j = i;
+                    while (j >= gap && array[j - gap] > temp) {
+                        array[j] = array[j - gap];
+                        j -= gap;
+                        drawArray(j); // Visualize the change
+                        await new Promise(resolve => setTimeout(resolve, 5)); // Slower animation to show progress
+                    }
+                    array[j] = temp;
+                }
+                gap = Math.floor(gap / 2);
+            }
+            drawArray(); // Final state of the array
+        }
+
+        // Button event to reset the array
+        document.getElementById('reset').addEventListener('click', () => {
+            initializeArray();
+        });
+
+        // Initialize and draw the initial array
+        initializeArray();
+
+        // Start sorting
+        setTimeout(shellSort, 1000); // Start after a second to allow the user to see the initial array
+
+    </script>
+</body>
+</html>
