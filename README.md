@@ -1,1 +1,1 @@
-# shell-sort-html
+first of,its actually very easy to view the website,you can easily modify the sorting code to be pattern defeating quick sort credits for the person responsable for this sort,anyways if you follow my instructions good for you
