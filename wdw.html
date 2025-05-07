@@ -22,14 +22,14 @@
 </head>
 <body>
 
-    <h1>Shell Sort Visualization</h1>
+    <h1>Shell Sort jumpsytle</h1>
     <canvas id="canvas" width="1200" height="400"></canvas> <!-- Increased canvas width -->
     <button id="reset">Reset Array</button>
 
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        const numBars = 200;  // Increased number of bars to 150
+        const numBars = 250;  // Increased number of bars to 150
         const barWidth = canvas.width / numBars;
         let array = [];
 
@@ -46,7 +46,7 @@
         function drawArray(highlightIndex = null) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = 0; i < array.length; i++) {
-                ctx.fillStyle = highlightIndex === i ? 'red' : 'blue';
+                ctx.fillStyle = highlightIndex === i ? 'green' : 'red';
                 ctx.fillRect(i * barWidth, canvas.height - array[i], barWidth - 1, array[i]);
             }
         }
@@ -66,7 +66,7 @@
                     }
                     array[j] = temp;
                 }
-                gap = Math.floor(gap / 2.2);
+                gap = Math.floor(gap / 2.1);
             }
             drawArray(); // Final state of the array
         }
